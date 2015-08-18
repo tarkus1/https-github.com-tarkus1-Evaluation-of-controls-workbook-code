@@ -7,6 +7,9 @@ Sub stepThroughBuild()
 
 Dim wsSheets As Worksheets, wsActive As Worksheet, wsSheet As Worksheet
 
+' set the rebuild variable
+Rebuild = True
+
 columnNumber
 
 For Each wsSheet In ActiveWorkbook.Worksheets
@@ -18,10 +21,13 @@ For Each wsSheet In ActiveWorkbook.Worksheets
             insertColumns
             insertHeaderInfo
             fillTableForumulas
-            NAConclusion
+            ' NAConclusion
         
     End If
 Next wsSheet
+
+' done, reset the rebuild varable
+Rebuild = False
 
 End Sub
 ' figure out how many columns to add from the facility list
@@ -56,7 +62,7 @@ Sub insertColumns()
     
     ' MsgBox oListObj.ListColumns(9).Name
     
-    oListObj.HeaderRowRange.Offset(0, 8).Activate
+    oListObj.HeaderRowRange.Offset(0, 9).Activate
     
     ' headerRange.Offset(0, 8).Activate
     ActiveCell.PasteSpecial (xlPasteValues)
@@ -72,7 +78,7 @@ Sub insertHeaderInfo()
 '
     theSheet.Activate
     
-    theSheet.Range("I2:I9").Select
+    theSheet.Range("j2:j9").Select
     Range(Selection, Selection.Offset(0, facCount - 1)).Select
     Selection.FillRight
     
@@ -90,7 +96,7 @@ Sub fillTableForumulas()
 
     Set oListObj = theSheet.ListObjects(1)
 
-    oListObj.ListColumns(9).DataBodyRange.Select
+    oListObj.ListColumns(10).DataBodyRange.Select
          
     Range(Selection, Selection.Offset(0, facCount - 1)).Select
     

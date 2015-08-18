@@ -43,10 +43,10 @@ Sub removeColumns()
     
     Set oListObj = theSheet.ListObjects(1)
  
-    Do Until oListObj.ListColumns.Count < 12
+    Do Until oListObj.ListColumns.Count < 13
         columnCount = oListObj.ListColumns.Count
         Debug.Print columnCount
-        oListObj.ListColumns(10).Delete
+        oListObj.ListColumns(11).Delete
     Loop
  
 
@@ -61,7 +61,7 @@ Sub removeHeader()
     theSheet.Activate
     'MsgBox theSheet.Name
 
- Range("l9").Select
+ Range("k9").Select
     Range(Selection, Selection.End(xlUp)).Select
     Range(Selection, Selection.End(xlToRight)).Select
     

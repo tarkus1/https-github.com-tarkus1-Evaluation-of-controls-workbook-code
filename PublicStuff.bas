@@ -1,4 +1,6 @@
 Attribute VB_Name = "PublicStuff"
+Public Rebuild As Boolean
+
 Dim theSheet As Worksheet, oListObj As ListObject, Reason As Object, _
     resultRange As Range, columnCount As Variant
 

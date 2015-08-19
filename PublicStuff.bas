@@ -156,8 +156,15 @@ Sub RebuildSummary()
         
     Next sht
     
+    sumSheet.PivotTables("PivotTable2").RefreshTable
+    
+    sumSheet.Range("a1").Select
+    
+    
+    
     ' done, re-enable the worksheet activate event
-    Rebuild = True
+  
+    Rebuild = False
 
 End Sub
 

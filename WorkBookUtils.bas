@@ -46,8 +46,10 @@ Sub CreatePDF()
     Set Workbook = ActiveWorkbook
     
     thePath = Workbook.Path
+    Debug.Print thePath
     
     theName = Left(Workbook.Name, Len(Workbook.Name) - 5)
+    Debug.Print thePath & "/" & theName
     
     Workbook.Sheets(Array("Handout", "Facility List", "BP1 - Gas Exist Fac Des & Inst", _
         "BP2 - Gas New Fac Des & Inst", "BP3 - Gas Measurement", "BP4 - Gas Recording", _
@@ -57,7 +59,7 @@ Sub CreatePDF()
         "BP11 - Water Ex Fac Des & Inst", "BP12 - Water New Fac Des & Inst", _
         "BP13 - Water Measurement", "BP14 - Water Recording", "BP15 - Water Reporting")). _
         Select
-    ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, Filename:=thePath & theName _
+    ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, Filename:=thePath & "/" & theName _
         , Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas _
         :=False, OpenAfterPublish:=True
 End Sub

@@ -1,6 +1,8 @@
 Attribute VB_Name = "WorkBookUtils"
 Sub CheckContent()
     Dim objlist As Object, found As Object, wsSheet As Worksheet
+    
+    Rebuild = True
 
     For Each wsSheet In ActiveWorkbook.Worksheets
 
@@ -33,6 +35,8 @@ Sub CheckContent()
             
         End If
     Next wsSheet
+    
+    Rebuild = False
 
 End Sub
 
@@ -72,3 +76,93 @@ Sub shiftRight()
 '
     Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
 End Sub
+
+
+Sub concFormat()
+'
+' concFormat Macro
+'
+
+'
+    'ActiveWorkbook.ActiveSheet.ListObjects(1).ListColumns("Reason for Conclusion").DataBodyRange.Select
+    
+    Dim objlist As Object, found As Object, wsSheet As Worksheet
+    
+    Rebuild = True
+
+    For Each wsSheet In ActiveWorkbook.Worksheets
+
+        If Left(wsSheet.Name, 2) = "BP" Then
+        
+            wsSheet.Activate
+            
+            Set objlist = wsSheet.ListObjects(1)
+            
+            objlist.ListColumns("Reason for Conclusion").DataBodyRange.Select
+            
+            With Selection
+                .HorizontalAlignment = xlLeft
+                .VerticalAlignment = xlTop
+                .WrapText = True
+                .Orientation = 0
+                .AddIndent = False
+                .IndentLevel = 0
+                .ShrinkToFit = False
+                .ReadingOrder = xlContext
+                .MergeCells = False
+            End With
+            With Selection.Font
+                .Name = "Arial"
+                .Size = 12
+                .Strikethrough = False
+                .Superscript = False
+                .Subscript = False
+                .OutlineFont = False
+                .Shadow = False
+                .Underline = xlUnderlineStyleNone
+                .ColorIndex = xlAutomatic
+                .TintAndShade = 0
+                .ThemeFont = xlThemeFontNone
+            End With
+            
+        End If
+    Next wsSheet
+    
+    Rebuild = False
+            
+End Sub
+
+Sub rowHeights()
+    
+    ' autofit all rows in the BP sheets and make sure they are _
+        at least 30 high
+        
+    Dim objlist As Object, found As Object, wsSheet As Worksheet
+    
+    Rebuild = True
+
+    For Each wsSheet In ActiveWorkbook.Worksheets
+
+        If Left(wsSheet.Name, 2) = "BP" Then
+        
+            wsSheet.Activate
+            
+            Set objlist = wsSheet.ListObjects(1)
+            
+            objlist.ListColumns("Conclusion").DataBodyRange.Rows.EntireRow.AutoFit
+            
+            For Each Rw In objlist.ListColumns("Conclusion").DataBodyRange.Rows
+            
+                If Rw.rowHeight < 30 Then Rw.rowHeight = 30
+                
+            
+            Next Rw
+            
+        End If
+    Next wsSheet
+    
+    Rebuild = False
+
+End Sub
+
+

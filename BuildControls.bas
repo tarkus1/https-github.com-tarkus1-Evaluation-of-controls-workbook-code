@@ -166,7 +166,7 @@ Sub CorrectFormatting()
     End With
 
     'set the row height to 30
-    oListObj.ListColumns("Theme").DataBodyRange.RowHeight = 30
+    oListObj.ListColumns("Theme").DataBodyRange.rowHeight = 30
     
     'correct text alignment for NCE Component
     

@@ -12,6 +12,8 @@ Rebuild = True
 
 columnNumber
 
+
+
 For Each wsSheet In ActiveWorkbook.Worksheets
 
     If Left(wsSheet.Name, 2) = "BP" Then
@@ -44,7 +46,7 @@ Sub columnNumber()
     wrksht.Range("FacIDs").Select
     
    facCount = wrksht.Range("FacIDs").Count
-    MsgBox facCount
+    Debug.Print "facility count "; facCount
 
 End Sub
 

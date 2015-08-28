@@ -6,6 +6,10 @@ Dim theSheet As Worksheet, oListObj As ListObject, Reason As Object, _
 
 
 Public Sub NAConclusion()
+
+    ' sets the reason for conclusion to "Not Applicable to all facilities in the property." _
+        if all facilities are N/A
+        
     
     Application.ScreenUpdating = False
     

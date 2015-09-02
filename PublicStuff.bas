@@ -22,9 +22,10 @@ Public Sub NAConclusion()
             
         Set oListObj = wsSheet.ListObjects(1)
         
+        
         ' here is a maintenance item if columns are added to the table
         
-        columnCount = oListObj.ListColumns.Count - 8
+        columnCount = oListObj.ListColumns.Count - 9
     
         For Each Reason In oListObj.ListColumns("Reason for Conclusion").DataBodyRange
             Debug.Print "Reason currently is " & Reason.Value

@@ -1,5 +1,10 @@
 Attribute VB_Name = "workbookReset"
 Dim theSheet As Worksheet
+'
+' This module should be deleted from client copies to avoid accidentally
+' destroying the results
+
+
 
 ' step through all sheets
 Sub stepThroughReset()

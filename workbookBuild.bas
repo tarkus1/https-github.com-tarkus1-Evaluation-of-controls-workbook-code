@@ -12,8 +12,6 @@ Rebuild = True
 
 columnNumber
 
-
-
 For Each wsSheet In ActiveWorkbook.Worksheets
 
     If Left(wsSheet.Name, 2) = "BP" Then

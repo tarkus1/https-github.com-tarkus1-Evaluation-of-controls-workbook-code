@@ -13,7 +13,7 @@ Sub BuildControls()
     
         Debug.Print wsSheet.Name
         
-        If Left(wsSheet.Name, 2) = "BP" Then
+        If Left(wsSheet.Name, 4) = "BP15" Then ' fixed to BP15 for testing
             
                 Set theSheet = wsSheet
                 BPNum = WorksheetFunction.Trim(Mid(wsSheet.Name, 3, 2))
@@ -68,7 +68,7 @@ Sub FilterBPNCEs()
     Range("NCE_BP") = BPNum
 
     wsNCE.Range("NCESub[#All]").AdvancedFilter Action:=xlFilterCopy, CriteriaRange:= _
-        wsNCE.Range("R1:R2"), CopyToRange:=wsNCE.Range("T1:Y1"), Unique:=True
+        wsNCE.Range("R1:R2"), CopyToRange:=wsNCE.Range("T1:Z1"), Unique:=True
 
 End Sub
             
@@ -127,6 +127,10 @@ Sub CopyToTable()
     wsSheet.ListObjects(1).ListColumns("Theme").DataBodyRange.PasteSpecial _
         Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
+        
+    ' now grab any comments before the table gets toasted
+    
+    ' see module1 for work in progress
         
     wsNCE.ListObjects("BP_NCEs").Unlist
     

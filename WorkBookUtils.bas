@@ -124,7 +124,12 @@ Sub concFormat()
                 .TintAndShade = 0
                 .ThemeFont = xlThemeFontNone
             End With
-            
+            With Selection.Interior
+                .Pattern = xlNone
+                .TintAndShade = 0
+                .PatternTintAndShade = 0
+            End With
+
         End If
     Next wsSheet
     

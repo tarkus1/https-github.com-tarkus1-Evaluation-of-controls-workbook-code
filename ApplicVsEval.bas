@@ -1,42 +1,54 @@
 Attribute VB_Name = "ApplicVsEval"
-Sub ApplicEval()
 
-Dim themeObj As Object, wsSheet As Worksheet, firstrow As Variant, curRow As Variant, _
-    subTypeList() As Variant, arrIndx As Integer, arrDim As Integer, foundOne As Boolean
+Sub ApplicableVsEvaluated()
+
+'
+'   look at the client's portfolio of facilities to determine if any are applicable to each theme _
+    and then set whether the theme can be "not applicable" or "not evaluated" _
+    reference: https://aer.ca/documents/projects/epap/EPAP_AvailableOptionsforDeclarationThemeConclusion.pdf
+'
+
+
+Dim themeObj As Object, wsSheet As Worksheet, firstrow As Variant, curCol As Variant, _
+    subTypeList() As Variant, arrIndx As Integer, arrDim As Integer, foundOne As Boolean, _
+    thmNum As Integer
 
 Set wsSheet = ActiveWorkbook.Worksheets("Theme Applicability")
-Set themeObj = wsSheet.ListObjects("ThemeSubTypes")
+Set themeObj = wsSheet.ListObjects("ThemeApplic")
 
 firstrow = themeObj.HeaderRowRange.Row
 
 Debug.Print "First row "; firstrow
 
-For Each thm In themeObj.ListColumns
+For Each thm In themeObj.ListRows
 
-    If Val(thm.Name) >= 1 Then
-        Debug.Print thm.Name
+    If Val(thm.Range.Item(1)) >= 1 Then
+
+        thmNum = thm.Range.Item(1).Value
                             
+        Debug.Print thmNum
+        
         arrIndx = 1
 
-        arrDim = Application.WorksheetFunction.CountIf(thm.DataBodyRange, "Y")
+        arrDim = Application.WorksheetFunction.CountIf(thm.Range, "Y")
         
         ReDim subTypeList(1 To arrDim)
         
-        For Each thmtype In thm.DataBodyRange
+        For Each thmtype In thm.Range
             
             
             
-            curRow = thmtype.Row - firstrow
+            curCol = thmtype.Column - 1
             
-            Debug.Print thmtype.Value; curRow
+            Debug.Print thmtype.Value; curCol + 1
             
             If UCase(thmtype.Value) = "Y" Then _
             
-                Debug.Print themeObj.ListColumns("SubType").DataBodyRange.Item(curRow).Value
+                Debug.Print themeObj.HeaderRowRange.Item(curCol + 1).Value     '("SubType").DataBodyRange.Item(curRow).Value
 
                 ' work here on indx and increment
                 
-                subTypeList(arrIndx) = themeObj.ListColumns("SubType").DataBodyRange.Item(curRow).Value
+                subTypeList(arrIndx) = themeObj.HeaderRowRange.Item(curCol + 1).Value
                 
                 Debug.Print "array "; arrIndx; subTypeList(arrIndx)
                 
@@ -57,16 +69,21 @@ For Each thm In themeObj.ListColumns
             
             If Not Range("petrinex[Facility Sub-Type]").Find(stype) Is Nothing Then
                 foundOne = True
-                Debug.Print "Theme "; thm.Name; " found subtype "; stype
+                Debug.Print "Theme "; thm.Range.Item(1).Value; " found subtype "; stype
             End If
         
         Next stype
         
         If foundOne = True Then
-            thm.Range.Rows.Item(1).Offset(-1, 0).Value = "Not Applicable"
+            ' client has an applicable facility
+            
+            Range("ThemeApplic[Evaluated]").Item(thmNum).Value = "Not Evaluated"
         
         Else
-            thm.Range.Rows.Item(1).Offset(-1, 0).Value = "Not Evaluated"
+            ' client has no applicable facilities
+            
+            Range("ThemeApplic[Evaluated]").Item(thmNum).Value = "Not Applicable"
+            
         End If
 
     
@@ -75,3 +92,9 @@ For Each thm In themeObj.ListColumns
 Next thm
 
 End Sub
+
+
+
+
+
+

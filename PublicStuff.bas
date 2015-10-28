@@ -6,10 +6,6 @@ Dim theSheet As Worksheet, oListObj As ListObject, Reason As Object, _
 
 
 Public Sub NAConclusion()
-
-    ' sets the reason for conclusion to "Not Applicable to all facilities in the property." _
-        if all facilities are N/A
-        
     
     Application.ScreenUpdating = False
     
@@ -21,7 +17,6 @@ Public Sub NAConclusion()
     If Left(wsSheet.Name, 2) = "BP" Then
             
         Set oListObj = wsSheet.ListObjects(1)
-        
         
         ' here is a maintenance item if columns are added to the table
         
@@ -43,10 +38,42 @@ Public Sub NAConclusion()
                 If WorksheetFunction.CountIf(resultRange, "N/A") = columnCount Then
         
                     Reason.Value = "Not Applicable to all facilities in the property."
-                
+                    With Reason.Font
+                        .Name = "Arial"
+                        .FontStyle = "Regular"
+                        .Size = 10
+                        .Strikethrough = False
+                        .Superscript = False
+                        .Subscript = False
+                        .OutlineFont = False
+                        .Shadow = False
+                        .Underline = xlUnderlineStyleNone
+                        .Color = 255
+                        .TintAndShade = 0
+                        .ThemeFont = xlThemeFontNone
+                    End With
+                    With Reason.Interior
+                        .Pattern = xlSolid
+                        .PatternColorIndex = xlAutomatic
+                        .Color = 14013951
+                        .TintAndShade = 0
+                        .PatternTintAndShade = 0
+                    End With
+                    With Reason
+                        .HorizontalAlignment = xlGeneral
+                        .VerticalAlignment = xlBottom
+                        .WrapText = True
+                        .Orientation = 0
+                        .AddIndent = False
+                        .IndentLevel = 0
+                        .ShrinkToFit = False
+                        .ReadingOrder = xlContext
+                        .MergeCells = False
+                    End With
                 Else
                     
                     Reason.Value = ""
+                    Reason.ClearFormats
                     
                 End If
             

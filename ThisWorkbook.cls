@@ -11,7 +11,7 @@ Dim TargetSheet As Worksheet, SourceSheet As Worksheet, _
     TargetName As String, SourceName As String, tNCE As String, sConc As String, _
     TargetNum As Variant, SourceNum As Variant, _
     SoListObj As ListObject, TgListObj As ListObject, _
-    Srow As Variant, TRow As Variant, FirstRow As Variant, temp As Variant
+    Srow As Variant, TRow As Variant, firstrow As Variant, temp As Variant
      
     
 Public Sub Workbook_SheetActivate(ByVal Sh As Object)
@@ -49,19 +49,19 @@ Public Sub Workbook_SheetActivate(ByVal Sh As Object)
                     Set SoListObj = SourceSheet.ListObjects(1)
                                        
                     ' do the grab of stuff here
-                    FirstRow = TgListObj.ListColumns("Conclusion").DataBodyRange.Row - 1
+                    firstrow = TgListObj.ListColumns("Conclusion").DataBodyRange.Row - 1
                     
                     For Each tconc In TgListObj.ListColumns("Conclusion").DataBodyRange.Cells
                 
                         If tconc.Value = Empty Then
-                            TRow = tconc.Row - FirstRow
+                            TRow = tconc.Row - firstrow
                             
                             tNCE = TgListObj.ListColumns("NCE").DataBodyRange.Item(TRow).Value
                             
                             For Each sNCE In SoListObj.ListColumns("NCE").DataBodyRange.Cells
                                 If sNCE.Value = tNCE Then
                                 
-                                    Srow = sNCE.Row - FirstRow
+                                    Srow = sNCE.Row - firstrow
                                     
                                     'Conclusion
                                     TgListObj.ListColumns("Conclusion").DataBodyRange.Cells(TRow).Value = _
@@ -97,6 +97,8 @@ Public Sub Workbook_SheetActivate(ByVal Sh As Object)
     End If
     Set SourceSheet = Nothing
 End Sub
+
+
 
 
 

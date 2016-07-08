@@ -9,11 +9,13 @@ Sub BuildControls()
     ' make sure the worksheet activate event doesn't do it's whole thing
     Rebuild = True
     
+    Application.ScreenUpdating = False
+    
     For Each wsSheet In ActiveWorkbook.Worksheets
     
         Debug.Print wsSheet.Name
         
-        If Left(wsSheet.Name, 4) = "BP15" Then ' fixed to BP15 for testing
+        If Left(wsSheet.Name, 2) = "BP" Then
             
                 Set theSheet = wsSheet
                 BPNum = WorksheetFunction.Trim(Mid(wsSheet.Name, 3, 2))
@@ -33,12 +35,13 @@ Sub BuildControls()
     Next wsSheet
     
     ' done, re-enable the worksheet activate event
-    Rebuild = True
+    Rebuild = False
+    Application.ScreenUpdating = True
 
 End Sub
 
 Sub DeleteTableRows()
-    Dim TRow As Object, FirstRow As Variant, oListObj As Object, _
+    Dim TRow As Object, firstrow As Variant, oListObj As Object, _
         oListRows As ListRows, RowIndex As Variant
     
     'Set wsSheet = ActiveWorkbook.Worksheets("BPT3 - Gas MeasurementTest")
@@ -62,13 +65,18 @@ Sub DeleteTableRows()
 End Sub
 
 Sub FilterBPNCEs()
+
+    ' Set wsSheet = ActiveWorkbook.Worksheets("BP1 - Gas Exist Fac Des & Inst")
+
     Set wsNCE = ActiveWorkbook.Worksheets("NCE Component")
+    Debug.Print BPNum
+    
     Debug.Print "in FilterBPNCEs for the " & wsSheet.Name
         
     Range("NCE_BP") = BPNum
 
     wsNCE.Range("NCESub[#All]").AdvancedFilter Action:=xlFilterCopy, CriteriaRange:= _
-        wsNCE.Range("R1:R2"), CopyToRange:=wsNCE.Range("T1:Z1"), Unique:=True
+        wsNCE.Range("q1:q2"), CopyToRange:=wsNCE.Range("s1:x1"), Unique:=True
 
 End Sub
             
@@ -112,7 +120,7 @@ Sub FilterClientControls()
 End Sub
             
 Sub CopyToTable()
-    'Set wsSheet = ActiveWorkbook.Worksheets("BPT3 - Gas MeasurementTest")
+    
     Set wsClient = ActiveWorkbook.Worksheets("Client Controls")
     Set wsNCE = ActiveWorkbook.Worksheets("NCE Component")
 
@@ -152,7 +160,8 @@ Sub CopyToTable()
 End Sub
             
 Sub CorrectFormatting()
-     Set wsSheet = ActiveWorkbook.ActiveSheet
+
+    ' Set wsSheet = ActiveWorkbook.ActiveSheet
     Set oListObj = wsSheet.ListObjects(1)
     Debug.Print oListObj
     
@@ -169,8 +178,16 @@ Sub CorrectFormatting()
         .Apply
     End With
 
-    'set the row height to 30
-    oListObj.ListColumns("Theme").DataBodyRange.rowHeight = 30
+    'set the row height
+    
+    oListObj.ListColumns("NCE Component Description").DataBodyRange.Rows.EntireRow.AutoFit
+                        
+    For Each Rw In oListObj.ListColumns("NCE Component Description").DataBodyRange.Rows
+    
+        If Rw.rowHeight < 30 Then Rw.rowHeight = 30
+            
+    Next Rw
+
     
     'correct text alignment for NCE Component
     
@@ -182,13 +199,6 @@ Sub CorrectFormatting()
 
     End With
     
-    ' fix text format for NCE Component column
-    
-    ' oListObj.ListColumns("NCE Component").DataBodyRange.Rows(1).Copy
-    
-    ' oListObj.ListColumns("NCE Component").DataBodyRange.PasteSpecial _
-        Paste:=xlPasteFormats, Operation:=xlNone, _
-        SkipBlanks:=False, Transpose:=False
 
 End Sub
 
@@ -205,7 +215,7 @@ Sub ResetPrintArea()
     ' for the lower right, select 3 rows past the bottom of Reason for conclusion
     Set BottomRight = wsSheet.ListObjects(1).ListColumns("Reason for Conclusion").DataBodyRange.End(xlDown).Offset(3, 0)
     
-    Set PrArea = Range(("C1"), BottomRight)
+    Set PrArea = wsSheet.Range(("C1"), BottomRight)
     
     wsSheet.PageSetup.PrintArea = PrArea.Address
     

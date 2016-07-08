@@ -15,7 +15,7 @@ Sub CheckContent()
             With objlist.ListColumns("Conclusion").DataBodyRange
                 Set found = .Find("N/A")
                 If Not found Is Nothing Then
-                    firstaddress = found.Address
+                    firstAddress = found.Address
                     Do
                         found.Select
                         If found.Offset(0, 1) = "" _
@@ -28,7 +28,7 @@ Sub CheckContent()
                            
                         If found.Offset(0, 2) <> "N/A" Then MsgBox "found incorrect performer"
                         Set found = .FindNext(found)
-                    Loop While Not found Is Nothing And found.Address <> firstaddress
+                    Loop While Not found Is Nothing And found.Address <> firstAddress
                 End If
             End With
             Debug.Print "complete "; ActiveSheet.Name
@@ -63,7 +63,7 @@ Sub CreatePDF()
         "BP11 - Water Ex Fac Des & Inst", "BP12 - Water New Fac Des & Inst", _
         "BP13 - Water Measurement", "BP14 - Water Recording", "BP15 - Water Reporting")). _
         Select
-    ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, Filename:=thePath & "/" & theName _
+    ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, filename:=thePath & "/" & theName _
         , Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas _
         :=False, OpenAfterPublish:=True
 End Sub
@@ -129,7 +129,7 @@ Sub concFormat()
                 .TintAndShade = 0
                 .PatternTintAndShade = 0
             End With
-
+            
         End If
     Next wsSheet
     

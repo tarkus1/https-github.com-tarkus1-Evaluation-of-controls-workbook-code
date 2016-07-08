@@ -22,9 +22,14 @@ For Each wsSheet In ActiveWorkbook.Worksheets
             insertHeaderInfo
             fillTableForumulas
             ' NAConclusion
+            
         
     End If
 Next wsSheet
+
+' now go through the list of discussion points and add as comments
+
+AddDiscPoints
 
 ' done, reset the rebuild varable
 Rebuild = False

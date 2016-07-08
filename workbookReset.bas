@@ -14,6 +14,8 @@ Dim wsSheets As Worksheets, wsActive As Worksheet, wsSheet As Worksheet
 ' Set wsSheet = ActiveWorkbook.Worksheets
 Application.Calculation = xlManual
 
+Rebuild = True
+
 
 For Each wsSheet In ActiveWorkbook.Worksheets
 
@@ -30,6 +32,7 @@ For Each wsSheet In ActiveWorkbook.Worksheets
 Next wsSheet
 
 Application.Calculation = xlAutomatic
+Rebuild = False
 
 End Sub
 
@@ -96,6 +99,8 @@ Sub clearConcEvid()
  oListObj.ListColumns("Evidence").DataBodyRange.ClearContents
  
  oListObj.ListColumns("Control Performer Role").DataBodyRange.ClearContents
+  
+ oListObj.ListColumns("Reason for Conclusion").DataBodyRange.ClearContents
   
  ' need a way to preserve the N/A formula
  ' Set reasonCol = oListObj.ListColumns("Reason for Conclusion").DataBodyRange

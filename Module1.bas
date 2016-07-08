@@ -27,7 +27,7 @@ Sub columnSearch()
     'Range(Selection, Selection.End(xlDown)).Select
     'ActiveWindow.SmallScroll Down:=6
     
-    Set thetable = ActiveWorkbook.ActiveSheet.ListObjects("TestComments")
+    Set thetable = ActiveWorkbook.ActiveSheet.ListObjects("NCESub")
     thetable.ListColumns("Discussion Points").DataBodyRange.Select
     
     

@@ -52,9 +52,11 @@ Public Sub Workbook_SheetActivate(ByVal Sh As Object)
                     firstrow = TgListObj.ListColumns("Conclusion").DataBodyRange.Row - 1
                     
                     For Each tconc In TgListObj.ListColumns("Conclusion").DataBodyRange.Cells
-                
-                        If tconc.Value = Empty Then
-                            TRow = tconc.Row - firstrow
+                        
+                        TRow = tconc.Row - firstrow
+
+                        If tconc.Value = Empty And TgListObj.ListColumns("Control Performer Role"). _
+                            DataBodyRange.Item(TRow).Value = Empty Then
                             
                             tNCE = TgListObj.ListColumns("NCE").DataBodyRange.Item(TRow).Value
                             

@@ -6,10 +6,11 @@ Attribute VB_Name = "ShowDiscPts"
 Public Sub showDiscussionPoint()
         
         If Not Rebuild Then
-            
-            For Each cmt In ActiveSheet.Comments
-              cmt.Delete
-            Next cmt
+            If ActiveSheet.Comments.Count > 0 Then
+                For Each cmt In ActiveSheet.Comments
+                  cmt.Delete
+                Next cmt
+            End If
             
             Set tbl = Selection.ListObject
             If Not tbl Is Nothing Then

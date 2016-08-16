@@ -1,15 +1,32 @@
 Attribute VB_Name = "ShowDiscPts"
     Public tbl As ListObject, ncetbl As ListObject, firstrow As Integer, looktxt As String, nceRng As Range, _
-        cmText As String, cmLength As Variant, cmHeight As Variant, visrng As Range
+        cmText As String, cmLength As Variant, cmHeight As Variant, visrng As Range, _
+        cmtRng As Range
+               
 
 
 Public Sub showDiscussionPoint()
-        
+    Dim tc As Comment
+    Set tc = Nothing
+    
         If Not Rebuild Then
+            
+            Set cmtRng = ActiveSheet.ListObjects(1).ListColumns("NCE Component Description").DataBodyRange
+            
+            
+            ' Only delete comments in the NCE Component Description field
+            
             If ActiveSheet.Comments.Count > 0 Then
-                For Each cmt In ActiveSheet.Comments
-                  cmt.Delete
-                Next cmt
+                For Each nce In cmtRng
+                    
+                    Set tc = nce.Comment
+                    
+                    If Not tc Is Nothing Then
+                       tc.Delete
+                    End If
+                  
+                Next nce
+                
             End If
             
             Set tbl = Selection.ListObject

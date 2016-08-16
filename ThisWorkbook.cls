@@ -55,7 +55,7 @@ Public Sub Workbook_SheetActivate(ByVal Sh As Object)
                         
                         TRow = tconc.Row - firstrow
 
-                        If tconc.Value = Empty And TgListObj.ListColumns("Control Performer Role"). _
+                        If tconc.Value = Empty And TgListObj.ListColumns("Reason for Conclusion"). _
                             DataBodyRange.Item(TRow).Value = Empty Then
                             
                             tNCE = TgListObj.ListColumns("NCE").DataBodyRange.Item(TRow).Value
@@ -99,6 +99,8 @@ Public Sub Workbook_SheetActivate(ByVal Sh As Object)
     End If
     Set SourceSheet = Nothing
 End Sub
+
+
 
 
 

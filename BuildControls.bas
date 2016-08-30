@@ -199,6 +199,30 @@ Sub CorrectFormatting()
 
     End With
     
+    'add Observations:
+    
+    oListObj.ListColumns("NCE Component").DataBodyRange.Select
+    Selection.End(xlDown).Select
+    Selection.Offset(2, 0).Select
+    
+    With Selection.Font
+        .Name = "Arial"
+        .FontStyle = "Bold"
+        .Size = 8
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+
+    Selection.Value = "Observations:"
+
+    
 
 End Sub
 

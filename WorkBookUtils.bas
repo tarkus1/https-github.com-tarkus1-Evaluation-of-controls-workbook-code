@@ -47,6 +47,8 @@ Sub CreatePDF()
     Dim wBook As Workbook, theName As Variant, thePath As Variant
 
 '
+    Rebuild = True
+    
     Set Workbook = ActiveWorkbook
     
     thePath = Workbook.Path
@@ -118,6 +120,8 @@ Sub CreatePDF()
         .ThemeFont = xlThemeFontNone
     End With
     Sheets("BP1 - Gas Exist Fac Des & Inst").Select
+    
+    Rebuild = False
     
 End Sub
 

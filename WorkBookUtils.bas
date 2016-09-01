@@ -55,6 +55,30 @@ Sub CreatePDF()
     theName = Left(Workbook.Name, Len(Workbook.Name) - 5)
     Debug.Print thePath & "/" & theName
     
+        Sheets(Array("BP1 - Gas Exist Fac Des & Inst", "BP2 - Gas New Fac Des & Inst", _
+        "BP3 - Gas Measurement", "BP4 - Gas Recording", "BP5 - Gas Reporting", _
+        "BP6 - HC Liq Ex Fac Des & Inst", "BP7 - HC Liq New Fac Des & Inst", _
+        "BP8 - HC Liquid Measurement", "BP9 - HC Liquid Recording", _
+        "BP10 - HC Liquid Reporting", "BP11 - Water Ex Fac Des & Inst", _
+        "BP12 - Water New Fac Des & Inst", "BP13 - Water Measurement", _
+        "BP14 - Water Recording", "BP15 - Water Reporting")).Select
+    Sheets("BP1 - Gas Exist Fac Des & Inst").Activate
+    Range("I2:I9").Select
+    With Selection.Font
+        .Name = "Arial"
+        .FontStyle = "Regular"
+        .Size = 10
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ThemeColor = xlThemeColorDark1
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    
     Workbook.Sheets(Array("Handout", "Facility List", "BP1 - Gas Exist Fac Des & Inst", _
         "BP2 - Gas New Fac Des & Inst", "BP3 - Gas Measurement", "BP4 - Gas Recording", _
         "BP5 - Gas Reporting", "BP6 - HC Liq Ex Fac Des & Inst", _
@@ -63,9 +87,38 @@ Sub CreatePDF()
         "BP11 - Water Ex Fac Des & Inst", "BP12 - Water New Fac Des & Inst", _
         "BP13 - Water Measurement", "BP14 - Water Recording", "BP15 - Water Reporting")). _
         Select
+        
+    
     ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, filename:=thePath & "/" & theName _
         , Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas _
         :=False, OpenAfterPublish:=True
+        
+        Sheets(Array("BP1 - Gas Exist Fac Des & Inst", "BP2 - Gas New Fac Des & Inst", _
+        "BP3 - Gas Measurement", "BP4 - Gas Recording", "BP5 - Gas Reporting", _
+        "BP6 - HC Liq Ex Fac Des & Inst", "BP7 - HC Liq New Fac Des & Inst", _
+        "BP8 - HC Liquid Measurement", "BP9 - HC Liquid Recording", _
+        "BP10 - HC Liquid Reporting", "BP11 - Water Ex Fac Des & Inst", _
+        "BP12 - Water New Fac Des & Inst", "BP13 - Water Measurement", _
+        "BP14 - Water Recording", "BP15 - Water Reporting")).Select
+    Sheets("BP15 - Water Reporting").Activate
+    ActiveWindow.SmallScroll Down:=-24
+    Range("I2:I9").Select
+    With Selection.Font
+        .Name = "Arial"
+        .FontStyle = "Regular"
+        .Size = 10
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Sheets("BP1 - Gas Exist Fac Des & Inst").Select
+    
 End Sub
 
 Sub shiftRight()

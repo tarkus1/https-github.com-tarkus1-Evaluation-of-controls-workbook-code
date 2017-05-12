@@ -2,14 +2,14 @@ Attribute VB_Name = "BuildControls"
 
 Dim wsSheets As Worksheets, wsSource As Worksheet, wsSheet As Worksheet, _
     wsNCE As Worksheet, wsClient As Worksheet, oListObj As ListObject, _
-    headerRange As Range, BPNum As Variant
+    headerRange As Range, BPNum As Integer
 
 Sub BuildControls()
 
     ' make sure the worksheet activate event doesn't do it's whole thing
     Rebuild = True
     
-    Application.ScreenUpdating = False
+    'Application.ScreenUpdating = False
     
     For Each wsSheet In ActiveWorkbook.Worksheets
     
@@ -76,7 +76,7 @@ Sub FilterBPNCEs()
     Range("NCE_BP") = BPNum
 
     wsNCE.Range("NCESub[#All]").AdvancedFilter Action:=xlFilterCopy, CriteriaRange:= _
-        wsNCE.Range("q1:q2"), CopyToRange:=wsNCE.Range("s1:x1"), Unique:=True
+        wsNCE.Range("q1:q2"), CopyToRange:=wsNCE.Range("s1:y1"), Unique:=True
 
 End Sub
             
@@ -101,6 +101,9 @@ Sub FilterClientControls()
     
     wsClient.Range("CC_Criteria").Offset(1, 0).PasteSpecial (xlPasteValues)
     
+    wsClient.Range("CC_Criteria")(1, 1).Offset(1, 1) = BPNum
+    
+    
     wsNCE.ListObjects("BP_NCEs").Unlist
     
     ' reset the criteria range
@@ -110,7 +113,12 @@ Sub FilterClientControls()
     ' need to clear the data from the table?
     ' wsClient.Range(Range("Extract").Offset(1, 0), Range("Extract").End(xlDown)).Select
 
-    ' newCriteria.Select
+    newCriteria(1, 1).Offset(0, 1).Select
+    Selection.End(xlToLeft).Select
+    Selection.End(xlDown).Select
+    ActiveCell.Offset(0, 1).Select
+    Range(Selection, Selection.End(xlUp)).Offset(1, 0).Select
+    Selection.FillDown
     
     wsClient.Range("ClientControls[#All]").AdvancedFilter Action:=xlFilterCopy, _
         CriteriaRange:=newCriteria, CopyToRange:=wsClient.Range( _
@@ -198,30 +206,6 @@ Sub CorrectFormatting()
         .WrapText = True
 
     End With
-    
-    'add Observations:
-    
-    oListObj.ListColumns("NCE Component").DataBodyRange.Select
-    Selection.End(xlDown).Select
-    Selection.Offset(2, 0).Select
-    
-    With Selection.Font
-        .Name = "Arial"
-        .FontStyle = "Bold"
-        .Size = 8
-        .Strikethrough = False
-        .Superscript = False
-        .Subscript = False
-        .OutlineFont = False
-        .Shadow = False
-        .Underline = xlUnderlineStyleNone
-        .ColorIndex = xlAutomatic
-        .TintAndShade = 0
-        .ThemeFont = xlThemeFontNone
-    End With
-
-    Selection.Value = "Observations:"
-
     
 
 End Sub

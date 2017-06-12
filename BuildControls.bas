@@ -9,7 +9,7 @@ Sub BuildControls()
     ' make sure the worksheet activate event doesn't do it's whole thing
     Rebuild = True
     
-    'Application.ScreenUpdating = False
+    Application.ScreenUpdating = False
     
     For Each wsSheet In ActiveWorkbook.Worksheets
     

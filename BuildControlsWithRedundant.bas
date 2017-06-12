@@ -25,9 +25,9 @@ Sub BuildControls()
                 FilterClientControls
                 FilterBPNCEs
                 ' RemoveRedundantControls
-                CopyToTable
-                CorrectFormatting
-                ResetPrintArea
+                ' CopyToTable
+                ' CorrectFormatting
+                ' ResetPrintArea
                 
                 ' RebuildSummary
     

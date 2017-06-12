@@ -36,7 +36,7 @@ Attribute GetIDs.VB_ProcData.VB_Invoke_Func = " \n14"
 Dim fromSheet As Worksheet
     
     Set fromSheet = ActiveWorkbook.ActiveSheet
-    Application.Goto Reference:="FacIds"
+    Application.GoTo Reference:="FacIds"
     Selection.Copy
     
     fromSheet.Activate

@@ -17,7 +17,7 @@ Attribute Reset_Findings.VB_ProcData.VB_Invoke_Func = " \n14"
     Selection.ListObject.ListColumns(13).Delete
     Selection.ListObject.ListColumns(13).Delete
     Range("NCESummary[[#Headers],[ABBT0045481]]").Select
-    Application.Goto Reference:="FacIDs"
+    Application.GoTo Reference:="FacIDs"
     Selection.Copy
     Sheets("Findings Summary").Select
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _

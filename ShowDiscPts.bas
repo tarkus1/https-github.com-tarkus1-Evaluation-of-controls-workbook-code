@@ -54,7 +54,7 @@ Public Sub showDiscussionPoint()
                     cmHeight = Application.WorksheetFunction.RoundUp(cmLength / 65, 0) * 17
                     Debug.Print cmHeight
                     
-                    Set curcmt = ActiveCell.addComment
+                    Set curcmt = ActiveCell.AddComment
                     
                     curcmt.Text Text:=cmText
                     

@@ -27,10 +27,6 @@ For Each wsSheet In ActiveWorkbook.Worksheets
     End If
 Next wsSheet
 
-' now go through the list of discussion points and add as comments
-
-AddDiscPoints
-
 ' done, reset the rebuild varable
 Rebuild = False
 
@@ -59,7 +55,7 @@ Sub insertColumns()
     
     ' Set theSheet = ActiveSheet
     
-    Application.Goto Reference:="FacIDs"
+    Application.GoTo Reference:="FacIDs"
     Selection.Copy
     theSheet.Activate
     

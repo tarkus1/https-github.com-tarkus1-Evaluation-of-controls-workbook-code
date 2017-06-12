@@ -1,21 +1,14 @@
 Attribute VB_Name = "Module5"
-Sub hidecomments()
-Attribute hidecomments.VB_ProcData.VB_Invoke_Func = " \n14"
+Sub Macro5()
+Attribute Macro5.VB_ProcData.VB_Invoke_Func = " \n14"
 '
-' hidecomments Macro
-'
-
-'
-    Application.DisplayCommentIndicator = xlCommentAndIndicator
-    Application.DisplayCommentIndicator = xlCommentIndicatorOnly
-End Sub
-Sub hideacomment()
-Attribute hideacomment.VB_ProcData.VB_Invoke_Func = " \n14"
-'
-' hideacomment Macro
+' Macro5 Macro
 '
 
 '
-    Range("D11").Select
-    ActiveCell.Comment.Visible = True
+    Selection.End(xlToLeft).Select
+    Selection.End(xlDown).Select
+    ActiveCell.Offset(0, 1).Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.FillDown
 End Sub

@@ -26,7 +26,7 @@ Sub RefreshFindingsSummary()
     Set RiskRange = findObj.ListColumns("NCE Risk").DataBodyRange
     
    
-    facObj.DataBodyRange.Delete
+    'facObj.DataBodyRange.Delete
     
     facNum = 1
     
@@ -36,7 +36,7 @@ Sub RefreshFindingsSummary()
         Debug.Print fcol.Name
         
         
-        If UCase(Left(fcol.Name, 2)) = "AB" Then
+        If UCase(Left(fcol.Name, 2)) = "AB" Or UCase(Left(fcol.Name, 2)) = "SK" Then
             
             facID = fcol.Name
             

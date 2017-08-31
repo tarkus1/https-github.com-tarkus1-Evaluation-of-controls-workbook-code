@@ -9,7 +9,7 @@ Attribute LogoUpdate.VB_ProcData.VB_Invoke_Func = " \n14"
     ' make sure the worksheet activate event doesn't do it's whole thing
     Rebuild = True
     
-    Client = "Paramount"
+    Client = "NuVista"
 '
     Worksheets("Lookups").Activate
     Worksheets("Lookups").Shapes.Range(Array(Client)).Select

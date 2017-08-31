@@ -44,7 +44,7 @@ Sub CreatePDF()
 '
 ' CreatePDF Macro
 '
-    Dim wBook As Workbook, theName As Variant, thePath As Variant
+    Dim wBook As Workbook, theName As Variant, thePath As Variant, printFile As String
 
 '
     Rebuild = True
@@ -55,7 +55,8 @@ Sub CreatePDF()
     Debug.Print thePath
     
     theName = Left(Workbook.Name, Len(Workbook.Name) - 5)
-    Debug.Print thePath & "/" & theName
+    printFile = thePath & "/" & theName
+    Debug.Print printFile
     
         Sheets(Array("BP1 - Gas Exist Fac Des & Inst", "BP2 - Gas New Fac Des & Inst", _
         "BP3 - Gas Measurement", "BP4 - Gas Recording", "BP5 - Gas Reporting", _
@@ -91,9 +92,20 @@ Sub CreatePDF()
         Select
         
     
-    ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, filename:=thePath & "/" & theName _
+     ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, filename:=thePath & "/" & theName _
         , Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas _
         :=False, OpenAfterPublish:=True
+        
+     
+      'Workbook.Sheets(Array("Handout", "Facility List", "BP1 - Gas Exist Fac Des & Inst", _
+        "BP2 - Gas New Fac Des & Inst", "BP3 - Gas Measurement", "BP4 - Gas Recording", _
+        "BP5 - Gas Reporting", "BP6 - HC Liq Ex Fac Des & Inst", _
+        "BP7 - HC Liq New Fac Des & Inst", "BP8 - HC Liquid Measurement", _
+        "BP9 - HC Liquid Recording", "BP10 - HC Liquid Reporting", _
+        "BP11 - Water Ex Fac Des & Inst", "BP12 - Water New Fac Des & Inst", _
+        "BP13 - Water Measurement", "BP14 - Water Recording", "BP15 - Water Reporting")).PrintOut Copies:=1, Collate:=True, _
+        IgnorePrintAreas:=False, ActivePrinter:=PrintToPDF, _
+        PrToFileName:=printFile
         
         Sheets(Array("BP1 - Gas Exist Fac Des & Inst", "BP2 - Gas New Fac Des & Inst", _
         "BP3 - Gas Measurement", "BP4 - Gas Recording", "BP5 - Gas Reporting", _

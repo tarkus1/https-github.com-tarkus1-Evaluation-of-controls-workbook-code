@@ -25,6 +25,8 @@ Attribute SortForPmntCntls.VB_ProcData.VB_Invoke_Func = " \n14"
         .SortMethod = xlPinYin
         .Apply
     End With
+    Debug.Print ActiveSheet.Name; " paramount sort"
+    
     Rebuild = False
 End Sub
 
@@ -54,6 +56,8 @@ Sub SortBackFromPmntCntls()
         .SortMethod = xlPinYin
         .Apply
     End With
+    Debug.Print ActiveSheet.Name; " back to normal sort"
+
     Rebuild = False
 End Sub
 

@@ -27,6 +27,10 @@ For Each wsSheet In ActiveWorkbook.Worksheets
     End If
 Next wsSheet
 
+NAConclusion
+concFormat
+rowHeights
+
 ' done, reset the rebuild varable
 Rebuild = False
 

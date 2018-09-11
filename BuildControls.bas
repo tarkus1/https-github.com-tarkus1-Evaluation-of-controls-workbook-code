@@ -23,7 +23,7 @@ Sub BuildControls()
                 
                 DeleteTableRows
                 FilterBPNCEs
-                FilterClientControls
+                'FilterClientControls
                 CopyToTable
                 CorrectFormatting
                 ResetPrintArea

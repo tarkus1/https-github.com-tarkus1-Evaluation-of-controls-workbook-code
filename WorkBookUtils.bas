@@ -267,7 +267,6 @@ Sub addObs()
             tname.End(xlDown).Offset(2, 0).Value = "Observations:"
             
             
-            Selection.Value = "Observations:"
                       
         End If
     Next wsSheet

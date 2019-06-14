@@ -57,6 +57,7 @@ Sub CreatePDF()
     theName = Left(Workbook.Name, Len(Workbook.Name) - 5)
     Debug.Print thePath & "/" & theName
     
+    
         Sheets(Array("BP1 - Gas Exist Fac Des & Inst", "BP2 - Gas New Fac Des & Inst", _
         "BP3 - Gas Measurement", "BP4 - Gas Recording", "BP5 - Gas Reporting", _
         "BP6 - HC Liq Ex Fac Des & Inst", "BP7 - HC Liq New Fac Des & Inst", _
@@ -81,7 +82,19 @@ Sub CreatePDF()
         .ThemeFont = xlThemeFontNone
     End With
     
-    Workbook.Sheets(Array("Handout", "Facility List", "BP1 - Gas Exist Fac Des & Inst", _
+    ' Old style facility list
+   ' Workbook.Sheets(Array("Handout", "Facility List", "BP1 - Gas Exist Fac Des & Inst", _
+        "BP2 - Gas New Fac Des & Inst", "BP3 - Gas Measurement", "BP4 - Gas Recording", _
+        "BP5 - Gas Reporting", "BP6 - HC Liq Ex Fac Des & Inst", _
+        "BP7 - HC Liq New Fac Des & Inst", "BP8 - HC Liquid Measurement", _
+        "BP9 - HC Liquid Recording", "BP10 - HC Liquid Reporting", _
+        "BP11 - Water Ex Fac Des & Inst", "BP12 - Water New Fac Des & Inst", _
+        "BP13 - Water Measurement", "BP14 - Water Recording", "BP15 - Water Reporting")). _
+        Select
+        
+    ' new tabular facility list
+    
+    Workbook.Sheets(Array("Handout", "Tabular Facility List", "BP1 - Gas Exist Fac Des & Inst", _
         "BP2 - Gas New Fac Des & Inst", "BP3 - Gas Measurement", "BP4 - Gas Recording", _
         "BP5 - Gas Reporting", "BP6 - HC Liq Ex Fac Des & Inst", _
         "BP7 - HC Liq New Fac Des & Inst", "BP8 - HC Liquid Measurement", _
@@ -227,4 +240,40 @@ Sub rowHeights()
 
 End Sub
 
+Sub addObs()
+    ' add observation label below last row
+        
+    Dim objlist As Object, found As Object, wsSheet As Worksheet, tname As Range, tt As String
+    
+    
+    Rebuild = True
 
+    For Each wsSheet In ActiveWorkbook.Worksheets
+
+        If Left(wsSheet.Name, 2) = "BP" Then
+        
+            wsSheet.Activate
+            
+            Set objlist = wsSheet.ListObjects(1)
+            
+            tt = objlist.Name & "[[#Headers],[NCE Component]]"
+            
+            
+            Set tname = Range(tt)
+            
+            Debug.Print tname
+            
+            
+            tname.End(xlDown).Offset(2, 0).Value = "Observations:"
+            
+            
+            Selection.Value = "Observations:"
+                      
+        End If
+    Next wsSheet
+    
+    Rebuild = False
+
+
+
+End Sub

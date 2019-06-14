@@ -25,11 +25,14 @@ For Each wsSheet In ActiveWorkbook.Worksheets
             
         
     End If
+
 Next wsSheet
 
 NAConclusion
 concFormat
 rowHeights
+addObs
+
 
 ' done, reset the rebuild varable
 Rebuild = False

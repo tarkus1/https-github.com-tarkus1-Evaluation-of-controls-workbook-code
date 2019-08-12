@@ -264,12 +264,16 @@ Sub addObs()
             Debug.Print tname
             
             
-            tname.End(xlDown).Offset(2, 0).Value = "Observations:"
+            tname.End(xlDown).Offset(2, 0).Select
+            
+            Selection.Activate
             
             
-                      
+            Selection.Value = "Observations:"
+            
+                                  
         End If
-    Next wsSheet
+   Next wsSheet
     
     Rebuild = False
 

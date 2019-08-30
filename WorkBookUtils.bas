@@ -104,7 +104,10 @@ Sub CreatePDF()
         Select
         
     
-    ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, filename:=thePath & "/" & theName _
+    ActiveWindow.SelectedSheets.PrintOut Copies:=1, Collate:=True, _
+        IgnorePrintAreas:=False
+    
+   ' ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, filename:=thePath & "/" & theName _
         , Quality:=xlQualityStandard, IncludeDocProperties:=True, IgnorePrintAreas _
         :=False, OpenAfterPublish:=True
         
